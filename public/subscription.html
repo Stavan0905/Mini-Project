@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Drip Stream | Subscription</title>
+  <link rel="icon" type="image/png" href="DRIPSTREAM_SYMBOL.png" />
+  <link rel="stylesheet" href="styles_subscription.css" />
+
+  <!-- PayPal SDK -->
+  <script src="https://www.paypal.com/sdk/js?client-id=AdXjedJbyovqZmPhLuicTuhP1rhq7JCvI9GCk4dHwM2zPmjOXrpmhukcyIUDwboHbNdtGqusb2-c3olp&currency=INR"></script>
+</head>
+
+<body>
+  <!--  Header -->
+  <header class="header">
+    <div class="logo">
+      <img src="DRIPSTREAM_SYMBOL.png" alt="DripStream Logo" />
+      <span class="brand">Drip Stream</span>
+    </div>
+
+    <div class="nav-menu">
+      <a href="DripStream_OTT.html">Home</a>
+      <a href="movies.html">Movies</a>
+      <a href="tv_shows.html">TV Shows</a>
+      <a href="mystuff.html">My Stuff</a>
+      <a href="subscription.html" class="active">Subscription</a>
+    </div>
+
+    <button class="logout-btn" onclick="logoutUser()">Logout</button>
+  </header>
+
+  <!--  Main Content -->
+  <main class="content">
+    <section class="subscription-section">
+      <h2>A Plan for Every Fan</h2>
+
+      <!--  Email Input -->
+      <input type="email" id="userEmail" placeholder="Enter your email" required />
+
+      <div class="plan-row">
+        <div class="plan-card">
+          <h3>Mobile</h3>
+          <p class="price">₹149/month</p>
+          <ul>
+            <li>Video Quality: Fair</li>
+            <li>Resolution: 480p</li>
+            <li>Devices: Mobile only</li>
+            <li>Screens: 1</li>
+            <li>Downloads: 1 device</li>
+          </ul>
+          <button onclick="startPayment('mobile')">Choose Mobile</button>
+        </div>
+
+        <div class="plan-card popular">
+          <h3>Basic <span class="badge">Most Popular</span></h3>
+          <p class="price">₹199/month</p>
+          <ul>
+            <li>Video Quality: Good</li>
+            <li>Resolution: 720p</li>
+            <li>Devices: TV, Computer, Mobile, Tablet</li>
+            <li>Screens: 1</li>
+            <li>Downloads: 1 device</li>
+          </ul>
+          <button onclick="startPayment('basic')">Choose Basic</button>
+        </div>
+
+        <div class="plan-card">
+          <h3>Standard</h3>
+          <p class="price">₹499/month</p>
+          <ul>
+            <li>Video Quality: Better</li>
+            <li>Resolution: 1080p</li>
+            <li>Devices: TV, Computer, Mobile, Tablet</li>
+            <li>Screens: 2</li>
+            <li>Downloads: 2 devices</li>
+          </ul>
+          <button onclick="startPayment('standard')">Choose Standard</button>
+        </div>
+
+        <div class="plan-card">
+          <h3>Premium</h3>
+          <p class="price">₹649/month</p>
+          <ul>
+            <li>Video Quality: Best</li>
+            <li>Resolution: 4K + HDR</li>
+            <li>Devices: TV, Computer, Mobile, Tablet</li>
+            <li>Screens: 4</li>
+            <li>Downloads: 4 devices</li>
+          </ul>
+          <button onclick="startPayment('premium')">Choose Premium</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!--  Footer -->
+  <footer class="footer">© 2025 Drip Stream</footer>
+
+  <!--  Payment Script -->
+  <script>
+    function startPayment(plan) {
+      const email = document.getElementById('userEmail').value.trim();
+
+      if (!email || !email.includes('@')) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+
+      // end payment request to Flask backend
+      fetch('/api/create-payment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ plan, email })
+      })
+      .then(res => {
+        if (!res.ok) throw new Error('Server returned ' + res.status);
+        return res.json();
+      })
+      .then(data => {
+        if (!data.approvalUrl) {
+          throw new Error('Missing PayPal approval URL');
+        }
+        window.location.href = data.approvalUrl; // Redirect to PayPal checkout
+      })
+      .catch(err => {
+        console.error('❌ Payment error:', err);
+        alert('Payment setup failed. Please try again later.');
+      });
+    }
+
+    function logoutUser() {
+    // Clear any stored user data (if using localStorage)
+    localStorage.clear();
+    sessionStorage.clear();
+
+    // Redirect to login or home page
+    window.location.href = "login.html";
+  }
+  </script>
+</body>
+</html>

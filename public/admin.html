@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Drip Stream</title>
+  <link rel="icon" type="image/png" href="DRIPSTREAM_SYMBOL.png" />
+  <link rel="stylesheet" href="style1.css" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(ellipse at center, #1a2332 0%, #0f1419 70%, #050810 100%);
+      font-family: 'Segoe UI', sans-serif;
+      color: #fff;
+    }
+
+    .header {
+      padding: 20px 40px;
+      background-color: #0f1419;
+      border-bottom: 1px solid #1a2332;
+      font-size: 24px;
+      font-weight: bold;
+      color: #4da6ff;
+      text-align: center;
+    }
+
+    .form-container {
+      padding: 30px 40px;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .form-container input {
+      padding: 10px;
+      border-radius: 6px;
+      border: none;
+      background-color: #1a2332;
+      color: #fff;
+      width: 200px;
+    }
+
+    .form-container button {
+      padding: 10px 20px;
+      background-color: #4da6ff;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: box-shadow 0.3s;
+    }
+
+    .form-container button:hover {
+      box-shadow: 0 0 10px #4da6ff;
+    }
+
+    #admin-products {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+      padding: 30px;
+    }
+
+    .admin-product {
+      background-color: #0f1419;
+      border-radius: 12px;
+      overflow: hidden;
+      width: 220px;
+      box-shadow: 0 0 12px rgba(77, 166, 255, 0.2);
+      transition: transform 0.3s ease;
+      text-align: center;
+      padding-bottom: 10px;
+    }
+
+    .admin-product:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(77, 166, 255, 0.4);
+    }
+
+    .admin-product img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .admin-product h3,
+    .admin-product p {
+      margin: 10px 0 5px;
+      color: #fff;
+    }
+
+    .admin-product p {
+      color: #4da6ff;
+    }
+
+    .admin-product input[type="text"] {
+      width: 90%;
+      padding: 6px;
+      margin-bottom: 8px;
+      border-radius: 4px;
+      border: none;
+      background-color: #1a2332;
+      color: #fff;
+    }
+
+    .admin-product button {
+      margin: 5px;
+      padding: 6px 12px;
+      border: none;
+      border-radius: 4px;
+      background-color: #1a2332;
+      color: #fff;
+      cursor: pointer;
+      transition: box-shadow 0.3s;
+    }
+
+    .admin-product button:hover {
+      box-shadow: 0 0 8px #4da6ff;
+    }
+
+    h3[contenteditable],
+    p[contenteditable] {
+      outline: none;
+      border-bottom: 1px dashed #4da6ff;
+      cursor: text;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #0f1419;
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 10px;
+      border-bottom: 1px solid #1a2332;
+      text-align: left;
+    }
+
+    th {
+      color: #4da6ff;
+      background-color: #1a2332;
+    }
+  </style>
+</head>
+<body>
+  <!-- 📄 Subscription Viewer -->
+  <div class="header" style="margin-top: 40px;">User Subscriptions</div>
+  <div class="form-container" style="flex-direction: column; align-items: stretch;">
+    <table id="subsTable">
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>Plan</th>
+          <th>Amount</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <!-- 📜 Script -->
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+  <script src="script2.js"></script>
+  <script>
+    fetch('/api/subscriptions')
+      .then(res => res.json())
+      .then(data => {
+        const tbody = document.querySelector('#subsTable tbody');
+        data.forEach(sub => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${sub.userEmail}</td>
+            <td>${sub.plan}</td>
+            <td>₹${sub.amountPaid}</td>
+            <td>${new Date(sub.startDate).toLocaleDateString()}</td>
+            <td>${new Date(sub.endDate).toLocaleDateString()}</td>
+          `;
+          tbody.appendChild(row);
+        });
+      })
+      .catch(err => {
+        console.error('❌ Failed to load subscriptions:', err);
+      });
+  </script>
+</body>
+</html>

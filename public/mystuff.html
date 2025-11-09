@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Stuff - Drip Stream</title>
+  <link rel="icon" type="image/png" href="DRIPSTREAM_SYMBOL.png" />
+  <link rel="stylesheet" href="mystuff.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">
+      <img src="DRIPSTREAM_SYMBOL.png" alt="DripStream Logo" />
+      <span class="brand">Drip Stream</span>
+    </div>
+
+    <nav class="nav-links">
+      <a href="DripStream_OTT.html">Home</a>
+      <a href="movies.html">Movies</a>
+      <a href="tv_shows.html">TV Shows</a>
+      <a href="mystuff.html" class="active">My Stuff</a>
+      <a href="subscription.html">Subscription</a>
+    </nav>
+
+    <div class="auth">
+      <div class="search-container">
+        <button id="searchToggle" class="search-icon">🔍</button>
+        <input type="text" id="searchInput" class="search-input" placeholder="Search..." />
+      </div>
+      <button id="logoutBtn" class="logout-icon">
+        <span>Logout</span>
+        <div class="icon-frame">
+          <span class="arrow">→</span>
+        </div>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="content">
+    <h2 class="welcome-message">My Stuff</h2>
+    <p class="subtitle">Your saved or favourite shows appear here.</p>
+    <div id="myStuffGrid" class="carousel"></div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">© 2025 Drip Stream FSD Project</footer>
+
+  <script src="js/mystuff.js"></script>
+</body>
+</html>

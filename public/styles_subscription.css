@@ -1,0 +1,197 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #0d0d0d;
+  color: #fff;
+  scroll-behavior: smooth;
+}
+
+.content {
+  padding-top: 100px;
+}
+
+/* Header */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #111;
+  color: #fff;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  z-index: 100;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo img {
+  height: 40px;
+}
+
+.logo .brand {
+  font-size: 20px;
+  color: #00aaff;
+  font-weight: bold;
+}
+
+.nav-menu a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 10px;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.nav-menu a:hover,
+.nav-menu a.active {
+  color: #00aaff;
+}
+
+.logout-btn {
+  background: transparent;
+  border: 2px solid #00aaff;
+  color: #00aaff;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+  background: #00aaff;
+  color: #fff;
+}
+
+/* Subscription Section */
+.subscription-section {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.subscription-section h2 {
+  color: #00aaff;
+  font-size: 28px;
+  margin-bottom: 30px;
+  text-shadow: 0 0 10px rgba(0, 170, 255, 0.4);
+}
+
+/* Email Input */
+.subscription-section input[type="email"] {
+  width: 320px;
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  background-color: #1c1c1c;
+  color: #fff;
+  margin-bottom: 30px;
+  font-size: 16px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 170, 255, 0.3);
+}
+
+/* Plans */
+.plan-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+
+/*  Plan Card */
+.plan-card {
+  background: #001830;
+  border: 1px solid #007bff;
+  border-radius: 12px;
+  width: 250px;
+  padding: 25px 20px;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(0,123,255,0.3);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.plan-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(0,123,255,0.7);
+}
+
+.plan-card h3 {
+  color: #00aaff;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.plan-card .price {
+  font-size: 22px;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 15px;
+}
+
+.plan-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+  color: #ddd;
+  text-align: left;
+  line-height: 1.6;
+}
+
+.plan-card button {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.plan-card button:hover {
+  background-color: #0056b3;
+}
+
+/* Highlighted Plan */
+.popular {
+  border: 2px solid #00aaff;
+  box-shadow: 0 0 25px rgba(0,170,255,0.6);
+}
+
+.badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background-color: #007bff;
+  color: #fff;
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+/*  Footer */
+.footer {
+  background: #000;
+  color: #777;
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
+}
+
+/*  Responsive */
+@media (max-width: 768px) {
+  .plan-row {
+    flex-direction: column;
+    align-items: center;
+  }
+}

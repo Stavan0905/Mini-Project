@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Drip Stream</title>
+  <link rel="icon" type="image/png" href="DRIPSTREAM_SYMBOL.png" />
+  <link rel="stylesheet" href="style.css" />
+
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      overflow-x: hidden;
+      background: radial-gradient(
+        ellipse at center,
+        #1a2332 0%,
+        #0f1419 70%,
+        #050810 100%
+      );
+      position: relative;
+    }
+
+    .particles-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: float 8s infinite linear;
+    }
+
+    .particle.blue {
+      background: #4da6ff;
+      box-shadow: 0 0 10px #4da6ff;
+    }
+
+    .particle.cyan {
+      background: #00ffff;
+      box-shadow: 0 0 8px #00ffff;
+    }
+
+    .particle.teal {
+      background: #00d4aa;
+      box-shadow: 0 0 6px #00d4aa;
+    }
+
+    .particle.purple {
+      background: #a64dff;
+      box-shadow: 0 0 8px #a64dff;
+    }
+
+    .particle.small {
+      width: 2px;
+      height: 2px;
+    }
+
+    .particle.medium {
+      width: 4px;
+      height: 4px;
+    }
+
+    .particle.large {
+      width: 6px;
+      height: 6px;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) translateX(0px);
+        opacity: 0;
+      }
+      10%,
+      90% {
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-10vh) translateX(var(--drift));
+        opacity: 0;
+      }
+    }
+
+    .star {
+      position: absolute;
+      background: #ffffff;
+      border-radius: 50%;
+      animation: twinkle 3s infinite ease-in-out;
+    }
+
+    .star.small {
+      width: 1px;
+      height: 1px;
+    }
+
+    .star.medium {
+      width: 2px;
+      height: 2px;
+    }
+
+    @keyframes twinkle {
+      0%,
+      100% {
+        opacity: 0.3;
+      }
+      50% {
+        opacity: 1;
+      }
+    }
+
+    .glow-orb {
+      position: absolute;
+      border-radius: 50%;
+      animation: pulse 4s infinite ease-in-out;
+    }
+
+    .glow-orb.blue {
+      background: radial-gradient(
+        circle,
+        rgba(77, 166, 255, 0.3) 0%,
+        rgba(77, 166, 255, 0) 70%
+      );
+    }
+
+    .glow-orb.cyan {
+      background: radial-gradient(
+        circle,
+        rgba(0, 255, 255, 0.2) 0%,
+        rgba(0, 255, 255, 0) 70%
+      );
+    }
+
+    @keyframes pulse {
+      0%,
+      100% {
+        transform: scale(0.8);
+        opacity: 0.3;
+      }
+      50% {
+        transform: scale(1.2);
+        opacity: 0.6;
+      }
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 25px;
+      margin-left: 40px;
+      align-items: center;
+    }
+
+    .nav-menu a {
+      color: #4da6ff;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 6px 10px;
+      border-radius: 4px;
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+
+    .nav-menu a:hover {
+      background-color: #1a2332;
+      box-shadow: 0 0 8px #4da6ff;
+    }
+  </style>
+</head>
+<body>
+  <!--Animated Particle Background -->
+  <div class="particles-container" id="particles"></div>
+
+  <!--  Header -->
+  <header class="header">
+    <div class="logo">
+      <img src="DRIPSTREAM_SYMBOL.png" alt="DripStream Logo" />
+      <span class="brand">Drip Stream</span>
+    </div>
+
+    <!-- Inline Navigation Menu -->
+    <div class="nav-menu">
+      <a href="DripStream_OTT.html">Home</a>
+      <a href="movies.html">Movies</a>
+      <a href="tv_shows.html">TV Shows</a>
+      <a href="mystuff.html">My Stuff</a>
+      <a href="subscription.html">Subscription</a>
+
+    </div>
+
+    <div class="auth">
+      <!-- Search -->
+      <div class="search-container">
+        <button id="searchToggle" class="search-icon">🔍</button>
+        <input
+          type="text"
+          id="searchInput"
+          class="search-input"
+          placeholder="Search movies..."
+        />
+      </div>
+
+
+
+      <!-- Logout Button -->
+      <button id="logoutBtn" class="logout-icon">
+        <span class="icon-frame">
+          <span class="arrow">➜</span>
+        </span>
+        Logout
+      </button>
+    </div>
+  </header>
+
+  <!--  Main Content -->
+  <main class="content">
+    <h2 id="welcomeMessage" class="welcome-message"></h2>
+
+    <section  style="margin-bottom: 30px;">
+      <h2 class="section-title">Trending Now</h2>
+      <div class="carousel" id="trending"></div>
+    </section>
+  </main>
+
+  <!--  Footer -->
+  <footer class="footer">© 2025 DripStream FSD Project</footer>
+
+  <!--  Scripts -->
+  <script src="js/dashboard.js"></script>
+
+</body>
+</html>
